@@ -6,14 +6,12 @@
     "alana": "src/alana.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "alana-platform-testing": "github:alana-cloud/platform-testing",
     "bluebird": "^3.4.7",
-    "botler": "github:botlerjs/core",
+    "botler": "github:alana-bot/core",
     "commander": "^2.9.0",
     "lodash": "^4.17.4",
     "mocha": "^3.2.0",
