@@ -12,16 +12,16 @@ if (program.rawArgs.length === 2) {
   program.web = true;
 }
 
-var Botler = require('botler');
+var Alana = require('alana-core');
 var Request = require('request-promise');
 var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
 
 global._ = _;
-global.messageType  = Botler.MessageTypes;
+global.messageType  = Alana.MessageTypes;
 
-const theBot = new Botler.default();
+const theBot = new Alana.default();
 global.bot = theBot;
 global.request = Request;
 global.addGreeting = theBot.addGreeting.bind(theBot);
@@ -43,13 +43,13 @@ listing
   });
 
 if (program.console) {
-  var Shell = require('botler-platform-console').default;
+  var Shell = require('alana-platform-console').default;
   var shellInput = new Shell(bot);
   bot.addPlatform(shellInput);
 }
 
 if (program.web) {
-  var Web = require('botler-platform-web').default;
+  var Web = require('alana-platform-web').default;
   var web = new Web(bot);
   bot.addPlatform(web);
 }

@@ -5,13 +5,14 @@
   "bin": {
     "alana": "src/alana.js"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "alana-core": "github:alana-bot/core",
+    "alana-platform-console": "github:alana-bot/platform-console",
+    "alana-platform-web": "github:alana-bot/platform-web",
     "bluebird": "^3.4.7",
-    "botler": "github:alana-bot/core",
     "commander": "^2.9.0",
     "lodash": "^4.17.4",
     "mocha": "^3.2.0",
