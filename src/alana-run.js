@@ -6,6 +6,7 @@ var program = require('commander');
 program
   .option('-c, --console', 'Run in console')
   .option('-w, --web', 'Run in console')
+  .option('-d, --debug', 'Run with logging')  
   .parse(process.argv);
 
 if (program.rawArgs.length === 2) {
@@ -28,7 +29,9 @@ global.addGreeting = theBot.addGreeting.bind(theBot);
 global.newScript = theBot.newScript.bind(theBot);
 global.getScript = theBot.getScript.bind(theBot);
 
-theBot.turnOnDebug();
+if (program.debug) {
+  theBot.turnOnDebug();
+}
 
 function extension(element) {
   var extName = path.extname(element);
@@ -43,15 +46,13 @@ listing
   });
 
 if (program.console) {
-  var Shell = require('alana-platform-console').default;
+  var Shell = require('@alana/platform-console').default;
   var shellInput = new Shell(bot);
-  bot.addPlatform(shellInput);
 }
 
 if (program.web) {
-  var Web = require('alana-platform-web').default;
+  var Web = require('@alana/platform-web').default;
   var web = new Web(bot);
-  bot.addPlatform(web);
 }
 
 bot.start();
