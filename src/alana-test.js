@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 require('source-map-support').install();
-var Botler = require('botler');
+var Alana = require('@alana/core');
 var Request = require('request-promise');
 var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
 var Mocha = require('mocha');
 var Promise = require('bluebird');
-
 var program = require('commander');
 
 program
@@ -28,9 +27,9 @@ Promise.config({
 });
 
 global._ = _;
-global.messageType  = Botler.MessageTypes;
+global.messageType  = Alana.MessageTypes;
 
-const theBot = new Botler.default();
+const theBot = new Alana.default();
 global.bot = theBot;
 global.request = Request;
 global.addGreeting = theBot.addGreeting.bind(theBot);
@@ -52,7 +51,7 @@ listing
     require(file);
   });
 
-var tester = new Botler.TestPlatform(bot);
+var tester = new Alana.TestPlatform(bot);
 global.newTest = tester.newTest.bind(tester);
 bot.addPlatform(tester);
 

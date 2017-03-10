@@ -12,7 +12,7 @@ if (program.rawArgs.length === 2) {
   program.web = true;
 }
 
-var Alana = require('alana-core');
+var Alana = require('@alana/core');
 var Request = require('request-promise');
 var _ = require('lodash');
 var fs = require('fs');

@@ -1,6 +1,6 @@
 {
   "name": "alana",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "alana cli",
   "bin": {
     "alana": "src/alana.js"
@@ -9,12 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "alana-core": "github:alana-bot/core",
-    "alana-platform-console": "github:alana-bot/platform-console",
-    "alana-platform-web": "github:alana-bot/platform-web",
+    "@alana/core": "2.x",
+    "@alana/platform-console": "1.x",
+    "@alana/platform-web": "1.x",
     "bluebird": "^3.4.7",
     "commander": "^2.9.0",
-    "lodash": "^4.17.4",
+    "lodash": "4.x",
     "mocha": "^3.2.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
