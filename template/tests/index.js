@@ -17,6 +17,8 @@
 
 test('echo', function(){
   return newTest()  // must return the test
+    .expectText('Welcome to echo-bot, I\'ll echo back what you say')
+    .expectText('I have some easter eggs too ;)')
     .sendText('hi')
     .expectText('hi')
     .sendText('alana')
@@ -26,6 +28,8 @@ test('echo', function(){
 
 test('ping pong', function(){
   return newTest()
+    .expectText('Welcome to echo-bot, I\'ll echo back what you say')
+    .expectText('I have some easter eggs too ;)')
     .sendText('ping')
     .expectText('pong')
     .run();

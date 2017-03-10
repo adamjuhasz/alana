@@ -14,3 +14,16 @@
 
 /** Dialog Function **/
 // function()
+
+addGreeting(function(user, response) {
+  response.sendText('Welcome to echo-bot, I\'ll echo back what you say');
+  response.sendText('I have some easter eggs too ;)');
+})
+
+newScript().expect.text(function(session, response, stop) {
+  if (session.message.text === 'ping') {
+    response.sendText('pong');
+  } else {
+    response.sendText(session.message.text);
+  }
+})
