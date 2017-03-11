@@ -8,8 +8,8 @@
   "scripts": {
     "doc": "typedoc --out docs node_modules/@alana/core/src --excludePrivate --target ES5 --module commonjs"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Adam Juhasz",
+  "license": "MIT",
   "dependencies": {
     "@alana/core": "2.x",
     "@alana/platform-console": "1.x",
