@@ -1,11 +1,11 @@
-# Batteries included chatbot framework with built-in collection of user intents, a strong scripting system, and integrated chatbot testing
+# Batteries included chatbot framework for javascript
 
-Online IDE at (https://alana.cloud)
+Online IDE at https://alana.cloud
 
-Framework documentation at (https://alana.tech)
+Framework documentation online at https://alana.tech or in [markdown](https://github.com/alana-bot/documentation)
 
 ## What's included
-- Intents, premade intents to understand user input (Open Source)[https://github.com/alana/intents]
+- built-in intents, premade intents to understand user input [Open Source](https://github.com/alana/intents)
 - Scripting system, simple but powerful
 - Testing module that is a a first class ssytem allowing you to easily refactor and verify
 - Multiple platform connectors (console, self-hosted web chat, facebook, etc...)
@@ -16,20 +16,27 @@ $ npm install -g alana
 ```
 
 ## Usage
-The best way to experience alana development is through the online IDE, however if you want to develop locally...
+The best way to experience alana development is through the (online IDE)[https://alana.cloud], however if you want to develop locally...
 ```bash
 $ alana
-# print help and list all commands
+# list all commands
 $ alana help <command>
 # print help about a specific command
 ```
 
-```bash
+### Most useful commands
+```
 $ alana init
 ```
 creates a basic template of an alana bot
 
-```bash
+```
 $ alana run
 ```
-Run the bot with 
+Run the bot locally
+
+```
+$ alana test
+```
+Run all test scripts
+
