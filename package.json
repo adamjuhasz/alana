@@ -1,11 +1,13 @@
 {
   "name": "alana",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "alana cli",
   "bin": {
     "alana": "src/alana.js"
   },
-  "scripts": {},
+  "scripts": {
+    "doc": "typedoc --out docs node_modules/@alana/core/src --excludePrivate --target ES5 --module commonjs"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
