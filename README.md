@@ -24,19 +24,14 @@ $ alana help <command>
 # print help about a specific command
 ```
 
-### Most useful commands
-```
-$ alana init
-```
-creates a basic template of an alana bot
-
-```
+#### Most useful commands
+```bash
+$ alana init    
+# creates a basic template of an alana bot
 $ alana run
-```
-Run the bot locally
-
-```
+# Run the bot locally
 $ alana test
+# Run all test scripts
 ```
-Run all test scripts
 
+## Trivia bot example
