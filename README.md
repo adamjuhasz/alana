@@ -16,7 +16,7 @@ $ npm install -g alana
 ```
 
 ## Usage
-The best way to experience alana development is through the (online IDE)[https://alana.cloud], however if you want to develop locally...
+The best way to experience alana development is through the [online IDE](https://alana.cloud), however if you want to develop locally...
 ```bash
 $ alana
 # list all commands
