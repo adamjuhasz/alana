@@ -42,8 +42,10 @@ All demos available [here](https://github.com/alana/demo)
 
 TOC
 - Setup
-- Basic menu
-- [Gameplay](#gameplay)
+- [Greeting](#add-a-greeting)
+- [Sending messages to the user](add-a-basic-menu)
+- [Scripting](#gameplay)
+- [Intents](#recognizing-intent)
 
 #### Setup
 First lets create a new bot and play with the echo template
@@ -231,8 +233,44 @@ $ alana test
   3 passing
 ```
 #### Recognizing intent
-What if the user is confused and needs instructions? Let's recognize the help intent and 
-
+What if the user is confused and needs instructions? Let's recognize the help intent. Add the following code between `.begin(...)` and `.dialog(...)` in `scripts\index.js`
+```javascript
+// scripts/index.js
+//newScript(topic)
+//.begin(...)
+.intent.always('general', 'help', (session, response) => {  // recognize the help action in the general domain
+  response.sendText(`You are in the ${topic} section`);     // send something helpful
+  response.goto('start');                                   // ask the current question again
+})
+//.dialog('start', ...)
+```
+```javascript
+// tests/index.js
+test('intent', function() {
+  return newTest()
+    .checkForTrailingDialogs()
+    .expectText('Welcome to trivia time!')
+    .expectText('Pick a trivia topic')
+    .expectText('history or sports')
+    .sendText('history')
+    .expectText('Time to test you on history!')
+    .expectText('Question 1')
+    .expectText('Is it:')
+    .expectText('a2 or a3 or a4 or a1')
+    .sendText('a1')
+    .expectText('Correct!')
+    .expectText('Your score is 1')
+    .expectText('Question 2')
+    .expectText('Is it:')
+    .expectText('a2 or a3 or a4 or a1')
+    .sendText('help')
+    .expectText('You are in the history section')
+    .expectText('Question 2')
+    .expectText('Is it:')
+    .expectText('a2 or a3 or a4 or a1')
+    .run();
+})
+```
 #### Play yourself
 ```bash
 $ alana run --console
