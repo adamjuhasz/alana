@@ -41,9 +41,9 @@ All demos available [here](https://github.com/alana/demo)
 > The purpose of the bot will be allowing players to play a game of trivia, present them with questions about a specific topic and have them try to answer them correctly. We'll keep track of the players scores too.
 
 TOC
-- Setup
+- [Setup](#setup)
 - [Greeting](#add-a-greeting)
-- [Sending messages to the user](add-a-basic-menu)
+- [Sending messages to the user](#add-a-basic-menu)
 - [Scripting](#gameplay)
 - [Intents](#recognizing-intent)
 
