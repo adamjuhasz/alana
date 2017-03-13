@@ -46,6 +46,7 @@ TOC
 - [Sending messages to the user](#add-a-basic-menu)
 - [Scripting](#gameplay)
 - [Intents](#recognizing-intent)
+- [Complete example](#final-file)
 
 #### Setup
 First lets create a new bot and play with the echo template
@@ -271,7 +272,7 @@ test('intent', function() {
     .run();
 })
 ```
-#### Play yourself
+#### Play it yourself
 ```bash
 $ alana run --console
 ```
@@ -298,6 +299,7 @@ addGreeting((user, response) => {
   response.sendText('Welcome to trivia time!');
   user.score = 0; //set the user's score to 0
 });
+// after the greeting is sent the default script will be called
 
 newScript() // 
   .dialog('start', (session, response, stop) => {
@@ -315,12 +317,16 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
       response.sendText(`Time to test you on ${topic}!`);
       session.user.question_number = 0; // Reset what question the user is on
     })
+    .intent.always('general', 'help', (session, response) => {
+      response.sendText(`You are in the ${topic} section`);
+      response.goto('start');
+    })
     .dialog('start', (session, response, stop) => {
       const question = trivia[topic][session.user.question_number];
       response
         .sendText(question.q)  
         .sendText('Is it:');
-      response.sendText(question.w.concat(question.c).join(' or '));
+      response.sendText(question.w.concat(question.c).join(' or ')); //exercise for the reader to shuffle these!
     })
     .expect.text((session, response, stop) => {
       const question = trivia[topic][session.user.question_number];
@@ -365,6 +371,31 @@ test('gameplay', function() {
     .sendText('history')
     .expectText('Time to test you on history!')
     .expectText('Question 1')
+    .expectText('Is it:')
+    .expectText('a2 or a3 or a4 or a1')
+    .run();
+})
+
+test('intent', function() {
+  return newTest()
+    .checkForTrailingDialogs()
+    .expectText('Welcome to trivia time!')
+    .expectText('Pick a trivia topic')
+    .expectText('history or sports')
+    .sendText('history')
+    .expectText('Time to test you on history!')
+    .expectText('Question 1')
+    .expectText('Is it:')
+    .expectText('a2 or a3 or a4 or a1')
+    .sendText('a1')
+    .expectText('Correct!')
+    .expectText('Your score is 1')
+    .expectText('Question 2')
+    .expectText('Is it:')
+    .expectText('a2 or a3 or a4 or a1')
+    .sendText('help')
+    .expectText('You are in the history section')
+    .expectText('Question 2')
     .expectText('Is it:')
     .expectText('a2 or a3 or a4 or a1')
     .run();
