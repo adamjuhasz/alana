@@ -246,7 +246,6 @@ addGreeting((user, response) => {
   response.sendText('Welcome to trivia time!');
   user.score = 0; //set the user's score to 0
 });
-// after the greeting is sent the default script will be called
 
 newScript() // 
   .dialog('start', (session, response, stop) => {
@@ -260,30 +259,17 @@ newScript() //
 
 Object.keys(trivia).forEach((topic) => { // iterate through each topic
   newScript(topic) // a new script with the topic name
-    /* 
-     * begin dialogs are like greetings for scripts, they are only sent once
-     */
     .begin((session, response, stop) => { 
       response.sendText(`Time to test you on ${topic}!`);
       session.user.question_number = 0; // Reset what question the user is on
     })
-    /* 
-     * If the dialog doesn't call stop() then the script will automatically flow 
-     * to the next dialog. We can also use named dialogs to move around a script
-     * we'll use this later to loop around the questions
-     */
     .dialog('start', (session, response, stop) => {
       const question = trivia[topic][session.user.question_number];
       response
         .sendText(question.q)  
-        .sendText('Is it:'); //notice how you can chain responses (but don't have to!)
-      response.sendText(question.w.concat(question.c).join(' or ')); //exercise for the reader to shuffle these!
+        .sendText('Is it:');
+      response.sendText(question.w.concat(question.c).join(' or '));
     })
-    /* 
-     * The script will stop here because the next dialog is an expect dialog, which tells
-     * alana to wait for input from the user. We can even specialize the expect to only 
-     * response to a text message.
-     */
     .expect.text((session, response, stop) => {
       const question = trivia[topic][session.user.question_number];
       if (session.message.text === question.c) {
@@ -300,10 +286,6 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
         response.goto('start');
        }
     });
-    /* 
-     * At the end of script, alana will automatically move the user to the default
-     * script, usually the main menu
-     */
 });
 ```
 ```javascript
