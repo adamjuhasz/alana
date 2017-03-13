@@ -40,6 +40,12 @@ All demos available [here](https://github.com/alana/demo)
 
 > The purpose of the bot will be allowing players to play a game of trivia, present them with questions about a specific topic and have them try to answer them correctly. We'll keep track of the players scores too.
 
+TOC
+- Setup
+- Basic menu
+- [Gameplay](#gameplay)
+
+#### Setup
 First lets create a new bot and play with the echo template
 ```bash
 $ alana init  
@@ -55,10 +61,10 @@ Open `scripts/index.js` and delete all the template code
 Let's add some trivia knowledge to the top of the 
 ```javascript
 const trivia = {
-  'history': [ // this is a trivia topic
-    { q: 'Question 1', // this is the question we will ask the user
-      w: ['a2', 'a3', 'a4'], // these are wrong answers
-      c: 'a1', // this is the correct answer
+  'history': [                                            // this is a trivia topic
+    { q: 'Question 1',                                    // this is the question we will ask the user
+      w: ['a2', 'a3', 'a4'],                              // these are wrong answers
+      c: 'a1',                                            // this is the correct answer
      },
      { q: 'Question 2', w: ['a2', 'a3', 'a4'], c: 'a1' },
      { q: 'Question 3', w: ['a2', 'a3', 'a4'], c: 'a1' },
@@ -75,16 +81,16 @@ Let's add a greeting (text that is sent once (and only once) to a new user when 
 ```javascript
 addGreeting((user, response) => {
   response.sendText('Welcome to trivia time!');
-  user.score = 0; //set the user's score to 0
+  user.score = 0;                                 //set the user's score to 0
 });
 // after the greeting is sent the default script will be called
 ```
 As a good software engineer, lets add a test to make sure the greeting is sent to users. Open `test/index.js`. Erase all the tests and add the following code:
 ```javascript
 test('greeting', function(){
-  return newTest()                          // we need to return the test promise
-    .expectText('Welcome to trivia time!')  // this is the greeting text we expect
-    .run();                                 // we need to call run() at the end of the test
+  return newTest()                               // we need to return the test promise
+    .expectText('Welcome to trivia time!')       // this is the greeting text we expect
+    .run();                                      // we need to call run() at the end of the test
 })
 ```
 Now run the test:
@@ -96,14 +102,15 @@ $ alana test
 #### Add a basic menu
 We need to let the user pick a trivie topic! So let's make a _default_ script that will handle that. Add the following code to `scripts/index.js`.
 ```javascript
-newScript() // 
+newScript()                                          // create a default script
   .dialog('start', (session, response, stop) => {
     response.sendText('Pick a trivia topic');
     const topics = Object.keys(trivia).join(' or ');
     response.sendText(topics);
   })
-  .expect.text((session, response, stop) => {
-    response.startScript(session.message.text);
+  .expect.text((session, response, stop) => {        // this will only be called if the user responds with a text message
+    const userInput = session.message.text;          // text of the user's message
+    response.startScript(userInput);                 // switch to a new script that has the title of the user's text
   });
 ```
 Now another test in `tests/index.js`for the menu at the bottom of the file.
@@ -126,14 +133,14 @@ $ alana test
 #### Gameplay
 To support actually playing the game we'll have to ask the user a question and give them some answers to choose from. With alana we can have named scripts that can be called from other scripts. So we'll make a new script for each topic. Each script is divided into *dialogs*. There are some special dialogs like begin, expect.
 ```javascript
-Object.keys(trivia).forEach((topic) => { // iterate through each topic
-  newScript(topic) // a new script with the topic name
+Object.keys(trivia).forEach((topic) => {                             // iterate through each topic
+  newScript(topic)                                                   // a new script with the topic name
     /* 
      * begin dialogs are like greetings for scripts, they are only sent once
      */
     .begin((session, response, stop) => { 
       response.sendText(`Time to test you on ${topic}!`);
-      session.user.question_number = 0; // Reset what question the user is on
+      session.user.question_number = 0;                              // Reset what question the user is on
     })
     /* 
      * If the dialog doesn't call stop() then the script will automatically flow 
@@ -222,6 +229,13 @@ $ alana test
   ✓  menu
   ✓  gameplay
   3 passing
+```
+#### Recognizing intent
+What if the user is confused and needs instructions? Let's recognize the help intent and 
+
+#### Play yourself
+```bash
+$ alana run --console
 ```
 #### Final file
 ```javascript
