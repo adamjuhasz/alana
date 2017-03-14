@@ -13,8 +13,6 @@ program
   .parse(process.argv);
 
 Promise.config({
-  // Enable warnings
-  warnings: true,
   // Enable long stack traces
   longStackTraces: true,
   // Enable cancellation
@@ -22,7 +20,7 @@ Promise.config({
   // Enable monitoring
   monitoring: true,
   warnings: {
-    wForgottenReturn: true
+    wForgottenReturn: false
   }
 });
 

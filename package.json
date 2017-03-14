@@ -1,6 +1,6 @@
 {
   "name": "alana",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "alana cli",
   "bin": {
     "alana": "src/alana.js"
