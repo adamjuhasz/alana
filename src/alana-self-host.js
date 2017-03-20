@@ -19,6 +19,13 @@ try {
   fs.writeFileSync(Path.join(process.cwd(), 'package.json'), f);
 }
 
+try {
+  const destFile = fs.statSync(Path.join(process.cwd(), 'index.js'));
+} catch(err) {
+  const f = fs.readFileSync(Path.join(__dirname, '..', 'self-host', 'index.js'));
+  fs.writeFileSync(Path.join(process.cwd(), 'index.js'), f);
+}
+
 var dontInstall = ['commander', 'lodash', 'mocha', 'source-map-support', 'bluebird', 'request', 'request-promise'];
 const packages = _.difference(_.keys(require(Path.join(__dirname, '..', 'package.json')).dependencies), dontInstall);
 const args = ['i', '--save'].concat(packages);
